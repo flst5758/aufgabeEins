@@ -30,10 +30,11 @@ class DBCacheService implements IsbnService {
         if($result->num_rows > 0){
             return $this->convertToMetadata($result);
         }
-//        echo $record;
-        $metadata = $this->_dataService->getData($isbn);
-        $stm=$dbConnection->prepare("INSERT INTO `metadata` (`id`, `isbn`, `form`, `year`, `lang`, `edition`, `title`, `author`, `publisher`, `city`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-        $stm->bind_param("sssssssss", $metadata->getIsbn(), 
+
+        $books = $this->_dataService->getData($isbn);
+        foreach ($books as $metadata) {
+            $stm=$dbConnection->prepare("INSERT INTO `metadata` (`id`, `isbn`, `form`, `year`, `lang`, `edition`, `title`, `author`, `publisher`, `city`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            $stm->bind_param("sssssssss", $metadata->getIsbn(), 
                 $metadata->getForm(), 
                 $metadata->getYear(),
                 $metadata->getLang(),
@@ -42,25 +43,31 @@ class DBCacheService implements IsbnService {
                 $metadata->getAuthor(),
                 $metadata->getPublisher(),
                 $metadata->getCity());
-        $stm->execute();
+            $stm->execute();    
+        }
         
-           echo "step 2";
-        
+        return $books;
     }
+    
     private function convertToMetadata($result){
-        $row = $result->fetch_assoc();
-        $metadata = new Metadata();
+        $books = array();
+        while($row = $result->fetch_assoc())
+        {
+            $metadata = new Metadata();
 
-        $metadata->setIsbn($row['isbn']);
-        $metadata->setForm($row['form']);
-        $metadata->setYear($row['year']);
-        $metadata->setLang($row['lang']);
-        $metadata->setEd($row['edition']);
-        $metadata->setTitle($row['title']);
-        $metadata->setAuthor($row['author']);
-        $metadata->setPublisher($row['publisher']);
-        $metadata->setCity($row['city']);
-        return $metadata;
+            $metadata->setIsbn($row['isbn']);
+            $metadata->setForm($row['form']);
+            $metadata->setYear($row['year']);
+            $metadata->setLang($row['lang']);
+            $metadata->setEd($row['edition']);
+            $metadata->setTitle($row['title']);
+            $metadata->setAuthor($row['author']);
+            $metadata->setPublisher($row['publisher']);
+            $metadata->setCity($row['city']);
+            
+            $books[] = $metadata;
+        }
+        return $books;
     }
     
 

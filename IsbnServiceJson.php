@@ -20,13 +20,6 @@ class IsbnServiceJson implements IsbnService {
     }
 
     private function getServiceData($isbn = null) {
-        $flag = true;
-        if (!is_null($isbn)) {
-            $isbn = $isbn;
-            $flag = false;
-        } else {
-            $isbn = $this->_isbn;
-        }
         if (is_null($isbn)) {
             return;
         }
@@ -34,32 +27,23 @@ class IsbnServiceJson implements IsbnService {
         $url = "http://xisbn.worldcat.org/webservices/xid/isbn/" . $isbn . "?method=getMetadata&format=json&fl=*"; //Wird json ausgegeben, nur über Aufruf der URL
         //$url = "http://xisbn.worldcat.org/webservices/xid/isbn/0596002815?method=getMetadata&format=xml&fl=*";
         $serviceData = file_get_contents($url);
-        echo htmlspecialchars($serviceData);
-        if ($flag) {
-            $this->_serviceData = $serviceData;
-        }
+      //  echo htmlspecialchars($serviceData);
 
         return $serviceData;
     }
 
     public function parseServiceData($data = null) {
-        $flag = true;
-        if (!is_null($data)) {
-            $serviceData = $data;
-            $flag = false;
-        } else {
-            $serviceData = $this->_serviceData;
-        }
-        if (is_null($serviceData)) {
-            return;
+
+        if (is_null($data)) {
+            return array();
         }
 
-        $json = json_decode($serviceData);
-        if ($json->stat == 'unknownId') {
-            return;
+        $json = json_decode($data);
+        if ($json->stat == 'unknownId' || $json->stat == 'invalidId') {
+            return array();
         }
-        echo "test 3";
-        echo $serviceData;
+      //  echo "test 3";
+      //  echo $data;
         $attributes = $json->list[0];
         $metadata = new Metadata();
 
@@ -77,7 +61,7 @@ class IsbnServiceJson implements IsbnService {
             $this->_metadata = $metadata;
         }
 
-        return $metadata;
+        return array($metadata);
     }
 
 }

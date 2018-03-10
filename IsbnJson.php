@@ -10,6 +10,9 @@ require_once './DBCacheService.php';
 require_once 'Metadata.php';
 $isbn = $_POST["isbn"];
 $service = new DBCacheService(new IsbnServiceJson($isbn));
-$book = $service->getData($isbn);
-echo json_encode(get_object_vars($book), JSON_PRETTY_PRINT);
+$books = $service->getData($isbn);
+
+$mapBook = function($book) {return get_object_vars($book);}; 
+$json = array_map($mapBook, $books);
+echo json_encode($json, JSON_PRETTY_PRINT);
 
