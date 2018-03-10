@@ -1,8 +1,9 @@
 <?php
 
 /**
- *
- * @author MBlock
+ * Interface for IsbnService
+ * @author MBlock, FSteffen
+ * 
  */
 interface IsbnService {
 	

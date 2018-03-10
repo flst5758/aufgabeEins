@@ -3,7 +3,7 @@
 /**
  * Description of Metadata
  *
- * @author MBlock
+ * @author MBlock, Florian Steffen
  */
 class Metadata {
 	

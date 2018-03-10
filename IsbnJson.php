@@ -1,13 +1,14 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * REST-Service-frontend for cache isbn-proxy server
+ * isbnJson.php = REST-Schnittstelle
+ * 
+ * @author FSteffen
  */
-require_once 'IsbnServiceJson.php';
-require_once './DBCacheService.php';
-require_once 'Metadata.php';
+require_once 'code/IsbnServiceJson.php';
+require_once 'code/DBCacheService.php';
+require_once 'code/Metadata.php';
 $isbn = $_POST["isbn"];
 $service = new DBCacheService(new IsbnServiceJson($isbn));
 $books = $service->getData($isbn);

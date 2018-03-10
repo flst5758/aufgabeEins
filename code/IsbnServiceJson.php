@@ -1,12 +1,12 @@
 <?php
 
-require_once './IsbnService.php';
-require_once './Metadata.php';
+require_once 'IsbnService.php';
+require_once 'Metadata.php';
 
 /**
- * Description of IsbnServiceJson
+ * Description of IsbnServiceJson: gets information from worldcat REST-Service it returns it as matadata object
  *
- * @author MBlock
+ * @author MBlock, FSteffen
  */
 class IsbnServiceJson implements IsbnService {
 

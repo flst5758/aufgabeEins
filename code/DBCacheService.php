@@ -1,13 +1,8 @@
 <?php
-require_once './My_MySQLi.php';
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once 'My_MySQLi.php';
 
 /**
- * Description of DBCacheService
+ * DBCacheService Cachlayer implementation retrieves requested isbn-infos from db or from dataServices
  *
  * @author Florian Steffen
  */
