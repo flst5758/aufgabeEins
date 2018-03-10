@@ -7,15 +7,15 @@
  */
 class Metadata {
 	
-	private $_form;
-	private $_year;
-	private $_lang;
-	private $_ed;
-	private $_title;
-	private $_author;
-	private $_publisher;
-	private $_city;
-	private $_isbn;
+	public $_form;
+	public $_year;
+	public $_lang;
+	public $_ed;
+	public $_title;
+	public $_author;
+	public $_publisher;
+	public $_city;
+	public $_isbn;
 	
 	public function getForm() {
 		return $this->_form;

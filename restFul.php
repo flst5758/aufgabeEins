@@ -4,7 +4,7 @@
 	</head>
 	<body>
 <?php
-require_once './IsbnServiceXml.php';
+
 require_once './IsbnServiceJson.php';
 require_once './Metadata.php';
 require_once './My_MySQLi.php';

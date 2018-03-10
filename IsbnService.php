@@ -6,10 +6,6 @@
  */
 interface IsbnService {
 	
-	public function getServiceData($isbn = null);
-	
-	public function parseServiceData($data = null);
-	
-	public function getData();
+	public function getData($isbn = null);
 	
 }
