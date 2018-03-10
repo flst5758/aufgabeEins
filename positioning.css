@@ -17,7 +17,6 @@ input[type=text], select, textarea {
     border-radius: 4px;
     box-sizing: border-box;
     margin-top: 6px;
-    margin-bottom: 16px;
     resize: vertical;
 }
 
@@ -35,9 +34,24 @@ input[type=submit]:hover {
 }
 
 #contentarea {
+    margin-top: 2em;
 	
 }
+#error{
 
+    color:red;
+    padding: 1ex 0;
+}
+.item {
+    padding: 1em 0;
+    width: 100%;
+}
+.item:hover{
+    background-color: #efefef;
+}
+.item tr td:first-child {
+    width: 100px;
+}
 .textblock {
 	min-height: 50px;
 	margin-top: 10px;
@@ -47,6 +61,9 @@ input[type=submit]:hover {
 	box-shadow: 5px 5px 7px grey;
 }
 
+.textblock dd {
+    display: inline;
+}
 .container {
     width: 980px;
     margin: auto auto;

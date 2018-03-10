@@ -9,22 +9,19 @@
 $(document).ready(function () {
     $("#searchForm").submit(function (event) {
         var isbn = $("#isbn").val();
-        $.post("IsbnJson.php", {isbn: isbn})
+        var cleanedIsbn = cleanIsbn(isbn);
+        $.post("IsbnJson.php", {isbn: cleanedIsbn})
                 .done(function (data) {
                     var results = JSON.parse(data);
                     $("#contentarea").empty();
-                    for (var result of results) { 
+                    for (var result of results) {
                         var html =
-                            "<div class='textblock'><dl>" +
-                            "<dt>Title</dt>" +
-                            "<dd>" + result._title + "</dd>" +
-                            "<dt>Author</dt>" +
-                            "<dd>" + result._author + "</dd>" +
-                            "<dt>Publisher</dt>" +
-                            "<dd>" + result._publisher + "</dd>" +
-                            "<dt>isbn</dt>" +
-                            "<dd>" + result._isbn + "</dd>" +
-                            "</dl></div>";
+                                `<table class="item">
+                                    <tr><td>Title</td><td>${result._title}</td></tr>
+                                    <tr><td>Author</td><td>${result._author}</td></tr>
+                                    <tr><td>Publisher</td><td>${result._publisher}</td></tr>
+                                    <tr><td>ISBN</td><td>${result._isbn}</td></tr>
+                                </table>`;
                         $("#contentarea").append(html);
                     }
                 })
@@ -35,5 +32,25 @@ $(document).ready(function () {
 
         event.preventDefault();
     });
+    $("#isbn").keyup(function (target) {
+        var isbn = $("#isbn").val();
+        if(!findIsbn(isbn)){
+            $("#error").text("Dies ist keine korrekte ISBN");
+        }else{
+            $("#error").text("");
+        }
+        function findIsbn(str){
+            regex = /\b(?:ISBN(?:: ?| ))?((?:97[89])?\d{9}[\dx])\b/i;
+
+            if (cleanIsbn(str).search(regex)>-1) {
+                return true;
+            }
+            return false; // No valid ISBN found
+        }
+    });
 });
+function cleanIsbn(str){
+    return str.replace(/-/g, '');
+    
+}
 

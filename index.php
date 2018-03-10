@@ -8,17 +8,13 @@
         <script src="isbn.js"></script>
     </head>
     <body>
-
-
-
         <div class="container">
-            <form id="searchForm" method="post" enctype="multipart/form-data" action="/action_page.php">
-         pattern="(?:-13)?:?\x20*(?=.{17}$)97(?:8|9)([ -])\d{1,5}\1\d{1,7}\1\d{1,6}\1\d$"
-                <input type="text" id="isbn" name="ISBN"  placeholder="978-" /><br />
+            <form id="searchForm" method="post" enctype="multipart/form-data">
+                <input type="text" id="isbn" name="ISBN"  placeholder="978-" />
+                <div id="error"></div>
                 <input type="submit" value="Submit">
             </form>
             <div id="contentarea">
-                
             </div>
         </div>
 
