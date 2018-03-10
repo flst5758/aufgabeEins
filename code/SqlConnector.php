@@ -5,7 +5,7 @@
  *
  * @author MBlock
  */
-class My_MySQLi {//verwendet Adapter MySQLi
+class SqlConnector {//verwendet Adapter MySQLi
 	
 	private $_host = null;
 	private $_username = null;

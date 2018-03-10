@@ -43,7 +43,7 @@ class IsbnServiceJson implements IsbnService {
             return array();
         }
       //  echo "test 3";
-      //  echo $data;
+        //echo $data;
         $attributes = $json->list[0];
         $metadata = new Metadata();
 
@@ -51,15 +51,12 @@ class IsbnServiceJson implements IsbnService {
         $metadata->setForm($attributes->form[0]);
         $metadata->setYear($attributes->year);
         $metadata->setLang($attributes->lang);
-        $metadata->setEd($attributes->ed);
+        // property ed does not exist on all records
+        //$metadata->setEd($attributes->ed);
         $metadata->setTitle($attributes->title);
         $metadata->setAuthor($attributes->author);
         $metadata->setPublisher($attributes->publisher);
         $metadata->setCity($attributes->city);
-
-        if ($flag) {
-            $this->_metadata = $metadata;
-        }
 
         return array($metadata);
     }

@@ -1,5 +1,5 @@
 <?php
-require_once 'My_MySQLi.php';
+require_once 'SqlConnector.php';
 
 /**
  * DBCacheService Cachlayer implementation retrieves requested isbn-infos from db or from dataServices
@@ -15,8 +15,7 @@ class DBCacheService implements IsbnService {
     }
 
     public function getData($isbn = null) {
-        $dbConnection = new My_MySQLi("localhost", "root", "", "aufgabe_eins");
-        $record = $dbConnection->query('SELECT * FROM `metadata` WHERE isbn = ?');
+        $dbConnection = new SqlConnector("localhost", "root", "", "aufgabe_eins");
         
         $stm=$dbConnection->prepare('SELECT `id`, `isbn`, `form`, `year`, `lang`, `edition`, `title`, `author`, `publisher`, `city` FROM `metadata` WHERE isbn = ?');
         $stm->bind_param("s", $isbn);
