@@ -2,7 +2,7 @@
 require_once 'SqlConnector.php';
 
 /**
- * DBCacheService Cachlayer implementation - retrieves requested isbn-infos from db or from dataServices
+ * DBCacheService Cachlayer implementation retrieves requested isbn-infos from db or from dataServices
  *
  * @author Florian Steffen
  */

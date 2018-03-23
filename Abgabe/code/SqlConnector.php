@@ -3,7 +3,7 @@
 /**
  * Description of MySQLi
  *
- * @author MBlock, FSteffen
+ * @author MBlock
  */
 class SqlConnector {//verwendet Adapter MySQLi
 	
